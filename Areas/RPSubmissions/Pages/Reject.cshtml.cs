@@ -46,9 +46,9 @@ namespace CallForBids.Areas.RPSubmissions.Pages
             }
             try
             {
+                Submissions = item;
                 if (Submissions.State != 1 && Submissions.State != 2)
                 {
-                    Submissions = item;
                     Submissions.State = 2;
                     await _context.SaveChangesAsync();
                     return RedirectToPage("./Index");

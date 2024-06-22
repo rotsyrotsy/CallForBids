@@ -73,7 +73,7 @@
                             @(item.State == 1 ? "accepted" : (item.State == 2 ? "refused" : "pending"))
                         </td>
                         <td>
-                            <a asp-page="/RPSubmissions/Details" asp-route-id="@item.Id">Details</a>
+                            <a asp-area="RPSubmissions" asp-page="/Details" asp-route-id="@item.Id">Details</a>
                         </td>
                     </tr>
                 }
