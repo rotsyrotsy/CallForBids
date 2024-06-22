@@ -1,0 +1,75 @@
+﻿@page
+@model CallForBids.Areas.RPBids.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Bids</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Bids.Id" />
+            <div class="form-group">
+                <label asp-for="Bids.PublicationDate" class="control-label"></label>
+                <input asp-for="Bids.PublicationDate" class="form-control" />
+                <span asp-validation-for="Bids.PublicationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bids.LimitDate" class="control-label"></label>
+                <input asp-for="Bids.LimitDate" class="form-control" />
+                <span asp-validation-for="Bids.LimitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bids.Title" class="control-label"></label>
+                <input asp-for="Bids.Title" class="form-control" />
+                <span asp-validation-for="Bids.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bids.Number" class="control-label"></label>
+                <input asp-for="Bids.Number" class="form-control" />
+                <span asp-validation-for="Bids.Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bids.Description" class="control-label"></label>
+                <input asp-for="Bids.Description" class="form-control" />
+                <span asp-validation-for="Bids.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bids.FiscalYear" class="control-label"></label>
+                <input asp-for="Bids.FiscalYear" class="form-control" />
+                <span asp-validation-for="Bids.FiscalYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bids.OfficeId" class="control-label"></label>
+                <select asp-for="Bids.OfficeId" class="form-control" asp-items="ViewBag.OfficeId"></select>
+                <span asp-validation-for="Bids.OfficeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bids.ProjectId" class="control-label"></label>
+                <select asp-for="Bids.ProjectId" class="form-control" asp-items="ViewBag.ProjectId"></select>
+                <span asp-validation-for="Bids.ProjectId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Bids.IsAvailable" /> @Html.DisplayNameFor(model => model.Bids.IsAvailable)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

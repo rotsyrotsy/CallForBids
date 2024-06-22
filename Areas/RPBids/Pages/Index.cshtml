@@ -1,0 +1,90 @@
+﻿@page
+@model CallForBids.Areas.RPBids.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].PublicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].LimitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].FiscalYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].Office)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].Project)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bids[0].IsAvailable)
+            </th>
+            <th>
+                Submissions Number
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Bids) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LimitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FiscalYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Office.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Poet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                    @(item.Submissions != null ? item.Submissions.Count : 0)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

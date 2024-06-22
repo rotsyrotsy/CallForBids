@@ -1,0 +1,46 @@
+﻿@page
+@model CallForBids.Areas.RPSubmissions.Pages.RejectModel
+
+@{
+    ViewData["Title"] = "Reject Submission";
+}
+
+<h1>Reject Submission</h1>
+
+<h3>Are you sure you want to reject this?</h3>
+<div>
+    <h4>Submission</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Bid reference
+        </dt>
+        <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Submissions.Bid.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Supplier
+        </dt>
+        <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Submissions.User.Suppliers.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Submission date
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submissions.Date)
+        </dd>
+    </dl>
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <form method="post">
+        <input type="hidden" asp-for="Submissions.Id" />
+        <input type="submit" value="Reject" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

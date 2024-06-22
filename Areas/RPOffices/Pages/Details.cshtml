@@ -1,0 +1,38 @@
+﻿@page
+@model CallForBids.Areas.RPOffices.Pages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Offices</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Offices.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Offices.Location)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Offices.Code)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Offices.Code)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Offices.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Offices.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Offices.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

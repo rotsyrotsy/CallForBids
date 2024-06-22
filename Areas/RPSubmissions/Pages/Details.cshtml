@@ -1,0 +1,68 @@
+﻿@page
+@model CallForBids.Areas.RPSubmissions.Pages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Submissions</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Bid
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submissions.Bid.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Supplier
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submissions.User.Suppliers.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Date of Submission
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submissions.Date)
+        </dd>
+        <dt class="col-sm-2">
+            Deadline
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submissions.Bid.LimitDate)
+        </dd>
+        <dt class="col-sm-2">
+            State
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.Submissions.State == 1 ? "Accepted" : (Model.Submissions.State == 2 ? "Refused" : "Pending"))
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Submissions.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submissions.Description)
+        </dd>
+        <dt class="col-sm-2">
+            Rejected at
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submissions.CancellationDate)
+        </dd>
+        <dt class="col-sm-2">
+            Accepted at
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submissions.ValidationDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Accept" asp-route-id="@Model.Submissions.Id">Accept</a> |
+    <a asp-page="./Reject" asp-route-id="@Model.Submissions.Id">Reject</a>|
+    <a asp-page="./Index">Back to List</a>
+</div>

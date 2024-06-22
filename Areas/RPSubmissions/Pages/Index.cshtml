@@ -1,0 +1,63 @@
+﻿@page
+@model CallForBids.Areas.RPSubmissions.Pages.ListModel
+
+@{
+    ViewData["Title"] = "List";
+    
+}
+
+<h1>List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Submissions[0].Bid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Submissions[0].User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Submissions[0].Date)
+            </th>
+            <th>
+                Deadline
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Submissions[0].State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Submissions[0].Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Submissions) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bid.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Suppliers.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                 @Html.DisplayFor(modelItem => item.Bid.LimitDate)
+            </td>
+            <td>
+                    @(item.State==1 ? "accepted" : (item.State==2 ? "refused" : "pending"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-page="./Accept" asp-route-id="@item.Id">Accept</a> |
+                <a asp-page="./Reject" asp-route-id="@item.Id">Reject</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
