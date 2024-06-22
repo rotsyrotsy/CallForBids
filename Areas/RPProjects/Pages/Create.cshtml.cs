@@ -8,10 +8,11 @@ namespace CallForBids.Areas.RPProjects.Pages
     public class CreateModel : PageModel
     {
         private readonly CallForBidsContext _context;
-
-        public CreateModel(CallForBidsContext context)
+        private IWebHostEnvironment _environment;
+        public CreateModel(CallForBidsContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         public IActionResult OnGet()
@@ -21,10 +22,11 @@ namespace CallForBids.Areas.RPProjects.Pages
 
         [BindProperty]
         public Projects Projects { get; set; } = new();
+        public IFormFile Upload { get; set; }
         public string ErrorMessage { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostFormProjectsAsync()
         {
             var newProject = new Projects();
             if (await TryUpdateModelAsync(newProject, "Project", f => f.Title, f => f.Poet))
@@ -46,6 +48,38 @@ namespace CallForBids.Areas.RPProjects.Pages
                 }
             }
             return Page();
+        }
+        public async Task<IActionResult> OnPostFormUploadAsync()
+        {
+            try
+            {
+                var file = Path.Combine(_environment.ContentRootPath, "wwwroot/uploads", Upload.FileName);
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    await Upload.CopyToAsync(fileStream);
+                }
+                List<Projects> projects;
+                if (Path.GetExtension(file).Equals(".csv", StringComparison.OrdinalIgnoreCase))
+                {
+                    var csvReader = new ProjectCsvReader();
+                    projects = csvReader.ReadCsvFile(file);
+                }
+                else
+                {
+                    throw new Exception("Unsupported file format");
+                }
+                // Insert projects into the database
+                _context.Projects.AddRange(projects);
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("./Index");
+            }
+            catch(Exception e)
+            {
+                ErrorMessage = e.Message;
+                return Page();
+            }
+            
         }
     }
 }
