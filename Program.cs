@@ -13,7 +13,11 @@ builder.Services.AddDbContext<CallForBidsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CallForBidsContext") ?? throw new InvalidOperationException("Connection string 'CallForBidsContext' not found.")));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/AccountAdmin/Login";
+                    options.LogoutPath = "/AccountAdmin/Logout";
+                });
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers(
