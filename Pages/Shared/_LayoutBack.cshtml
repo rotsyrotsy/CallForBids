@@ -11,20 +11,20 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <aside class="col-12 col-md-3 col-lg-2 bg-white border-end box-shadow mb-3">
+            <aside class="col-12 col-md-3 col-lg-2 bg-light border-end box-shadow mb-3">
                 <div class="d-flex flex-column align-items-center align-items-md-start p-3 bg-light">
                     <a asp-area="" asp-page="/Index" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-                        <span class="fs-5 fw-semibold">Admin Bidding Platform</span>
+                        <span class="fs-5 fw-bold">Admin Bidding Platform</span>
                     </a>
-                    <ul class="nav nav-pills flex-column mb-auto">
+                    <ul class="nav nav-pills flex-column mb-auto w-100">
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#bids-collapse" aria-expanded="false">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#bids-collapse" aria-expanded="false">
                                 Bids
                             </button>
-                            <div class="collapse show" id="bids-collapse" style="">
+                            <div class="collapse" id="bids-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     <li><a class="dropdown-item" asp-area="RPBids" asp-page="/Index">List</a></li>
                                     <li><a class="dropdown-item" asp-area="RPBids" asp-page="/Create">Create</a></li>
@@ -32,10 +32,10 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#offices-collapse" aria-expanded="false">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#offices-collapse" aria-expanded="false" aria-controls="offices-collapse"">
                                 Offices
                             </button>
-                            <div class="collapse show" id="offices-collapse" style="">
+                            <div class="collapse" id="offices-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     <li>
                                         <a class="dropdown-item" asp-area="RPOffices" asp-page="/Index">List</a>
@@ -47,10 +47,10 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#projects-collapse" aria-expanded="false">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#projects-collapse" aria-expanded="false">
                                 Projects
                             </button>
-                            <div class="collapse show" id="projects-collapse" style="">
+                            <div class="collapse" id="projects-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     <li><a class="dropdown-item" asp-area="RPProjects" asp-page="/Index">List</a></li>
                                     <li><a class="dropdown-item" asp-area="RPProjects" asp-page="/Create">Create</a></li>
@@ -58,35 +58,30 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#suppliers-collapse" aria-expanded="false">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#suppliers-collapse" aria-expanded="false">
                                 Suppliers
                             </button>
-                            <div class="collapse show" id="suppliers-collapse" style="">
+                            <div class="collapse" id="suppliers-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     <li><a class="dropdown-item" asp-area="RPSuppliers" asp-page="/Index">List</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#submissions-collapse" aria-expanded="false">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#submissions-collapse" aria-expanded="false">
                                 Submissions
                             </button>
-                            <div class="collapse show" id="submissions-collapse" style="">
+                            <div class="collapse" id="submissions-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     <li><a class="dropdown-item" asp-area="RPSubmissions" asp-page="/Index">List</a></li>
                                 </ul>
                              </div>
                         </li>
+                        <li class="border-top my-3"></li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Sign out</a>
                         </li>
                      </ul>
-                     
-                    <hr />
-                    <div class="mt-auto">
-                        <a class="d-flex align-items-center link-dark text-decoration-none"
-                        asp-area="" asp-page="/Account/Logout">Sign out</a>
-                    </div>
                 </div>
             </aside>
             <div class="col-12 col-md-9 col-lg-10 py-3">
@@ -103,9 +98,7 @@
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

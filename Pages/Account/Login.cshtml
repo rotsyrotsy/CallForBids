@@ -20,25 +20,29 @@
 <body class="body">
     <div class="container">
         <div class="row">
-            <form id="loginForm" method="post" class="col-md-4 mx-auto">
-                <div class="text-center mt-5">
-                    <h1>Log In</h1>
+            <div class="card col-md-4 mx-auto mt-5">
+                <div class="card-body">
+                    <form id="loginForm" method="post">
+                        <div class="text-center">
+                            <h1>Log In</h1>
+                        </div>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show"></div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" type="email" autocomplete="off" />
+                            <span asp-validation-for="Email" class="form-text text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" class="form-control" type="password"  autocomplete="off" />
+                            <div class="invalid-feedback" style="margin-top: 0; font-size: 16px;">
+                                The Password field is required.
+                            </div>
+                        </div>
+                        <button id="loginSAT" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show"></div>
-                <div class="mb-3">
-                    <label asp-for="Email" class="form-label"></label>
-                    <input asp-for="Email" class="form-control" type="email" autocomplete="off" />
-                    <span asp-validation-for="Email" class="form-text text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Password" class="form-label"></label>
-                    <input asp-for="Password" class="form-control" type="password"  autocomplete="off" />
-                    <div class="invalid-feedback" style="margin-top: 0; font-size: 16px;">
-                        The Password field is required.
-                    </div>
-                </div>
-                <button id="loginSAT" type="submit" class="btn btn-primary">Submit</button>
-            </form>
+             </div>
         </div>
     </div>
 

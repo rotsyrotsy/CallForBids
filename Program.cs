@@ -8,17 +8,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
-builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<CallForBidsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CallForBidsContext") ?? throw new InvalidOperationException("Connection string 'CallForBidsContext' not found.")));
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers(
     options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(
+    options =>
+    {
+        options.Conventions.AuthorizeAreaFolder("RPBids", "/");
+        options.Conventions.AuthorizeAreaFolder("RPOffices", "/");
+        options.Conventions.AuthorizeAreaFolder("RPProjects", "/");
+        options.Conventions.AuthorizeAreaFolder("RPSubmissions", "/");
+        options.Conventions.AuthorizeAreaFolder("RPSuppliers", "/");
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +45,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRazorPages().RequireAuthorization();
+app.MapRazorPages();
 
 app.Run();

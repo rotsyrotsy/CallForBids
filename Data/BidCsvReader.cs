@@ -42,7 +42,8 @@ namespace CallForBids.Data
                         LimitDate = csv.GetField<DateTime>("Deadline"),
                         OfficeId = office.Id,
                         ProjectId = project.Id,
-                        FiscalYear = csv.GetField<string>("FY")
+                        FiscalYear = csv.GetField<string>("FY"),
+                        IsAvailable = true
                     };
                     bids.Add(bid);
                 }
