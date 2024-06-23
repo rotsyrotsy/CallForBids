@@ -19,7 +19,10 @@ namespace CallForBids.Areas.RPBids.Pages
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            var bids = await _context.Bids.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+
+            var bids = await _context.Bids.AsNoTracking()
+                .Include(b=>b.Submissions)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (bids == null)
             {
                 return NotFound();

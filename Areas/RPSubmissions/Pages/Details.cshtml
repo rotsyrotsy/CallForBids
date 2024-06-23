@@ -39,7 +39,7 @@
             State
         </dt>
         <dd class="col-sm-10">
-            @(Model.Submissions.State == 1 ? "Accepted" : (Model.Submissions.State == 2 ? "Refused" : "Pending"))
+            @Html.DisplayFor(model => model.Submissions.State)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Submissions.Description)

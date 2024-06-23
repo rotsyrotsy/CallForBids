@@ -70,7 +70,7 @@
                             @Html.DisplayFor(modelItem => item.Bid.LimitDate)
                         </td>
                         <td>
-                            @(item.State == 1 ? "accepted" : (item.State == 2 ? "refused" : "pending"))
+                            @Html.DisplayFor(modelItem => item.State)
                         </td>
                         <td>
                             <a asp-area="RPSubmissions" asp-page="/Details" asp-route-id="@item.Id">Details</a>
