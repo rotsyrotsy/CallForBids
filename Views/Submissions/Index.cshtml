@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CallForBids.Models.Submissions>
+@{
+  
+}
+<h2>Submissions</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Bids Title</th>
+            <th>Date</th>
+            <th>State</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sub in Model)
+        {
+            <tr>
+                <td>@sub.Id</td>
+                <td>@sub.BidTitle</td>
+                <td>@sub.Date</td>
+                <td>@sub.State</td>
+                <td>@sub.Description</td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+<a class="btn btn-info" href="/Submissions/Export" role="button">Export Submissions to PDF</a>

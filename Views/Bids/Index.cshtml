@@ -1,0 +1,90 @@
+﻿@model IEnumerable<CallForBids.Models.Bids>
+
+@{
+    int pageNumber = ViewBag.PageNumber;
+    int pageSize = ViewBag.PageSize;
+    int totalItems = ViewBag.TotalItems;
+    int totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+    string searchTerm = ViewBag.SearchTerm;
+    int? officeId = ViewBag.OfficeId;
+}
+<h2>Dishes</h2>
+
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <label for="searchTerm">Search by Dish Name</label>
+        <input type="text" name="searchTerm" id="searchTerm" value="@searchTerm" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="officeId">Filter by Category</label>
+        <select name="officeId" id="officeId" class="form-control">
+            <option value="">All Categories</option>
+            <option value="2">Antanarivo</option>
+            <option value="4">Tsihombe</option>
+            <option value="5">Beloha</option>
+            <option value="6">Toliara</option>
+
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Publication Date</th>
+            <th>Limit Date </th>
+            <th>Title</th>
+            <th>Number</th>
+            <th>Description</th>
+            <th>Fiscal Year</th>
+            <th>Location</th>
+            <th>Address</th>
+            <th>Project Name</th>
+            <th>Is Available</th>
+            <th>Action</th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bid in Model)
+        {
+            <tr>
+                <td>@bid.PublicationDate</td>
+                <td>@bid.LimitDate</td>
+                <td>@bid.Title</td>
+                <td>@bid.Number</td>
+                <td>@bid.Description</td>
+                <td>@bid.FiscalYear</td>
+                <td>@bid.Location</td>
+                <td>@bid.Address</td>
+                <td>@bid.ProjectTitle</td>
+                <td>@bid.IsAvailable</td>
+                <td><a href="/Bids/Submission?bidId=@bid.Id" type="button" class="btn btn-success btn-sm">Submit</a></td>
+
+            </tr>
+        }
+    </tbody>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item @(pageNumber == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize, searchTerm, officeId })" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item @(i == pageNumber ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize, searchTerm, officeId })">@i</a>
+                </li>
+            }
+            <li class="page-item @(pageNumber == totalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize, searchTerm, officeId })" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</table>

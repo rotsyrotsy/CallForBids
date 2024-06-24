@@ -23,9 +23,13 @@ namespace CallForBids.Models
         public int? ProjectId { get; set; }
         [ForeignKey("ProjectId")]
         public virtual Projects? Project { get; set; }
-        public bool IsAvailable { get; set; }
+        public int IsAvailable { get; set; }
 
         public ICollection<Submissions>? Submissions { get; set; }
+
+        public string Location { get; set; }
+        public string Address { get; set; }
+        public string ProjectTitle { get; set; }
 
     }
 }
