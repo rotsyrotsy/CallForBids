@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using CallForBids.Data;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
-namespace CallForBids.Pages.Account
+namespace CallForBids.Pages.AccountAdmin
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
@@ -20,7 +20,7 @@ namespace CallForBids.Pages.Account
         public string ReturnUrl { get; set; }
         [BindProperty, Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [BindProperty, DataType(DataType.Password)]
+        [BindProperty,Required, DataType(DataType.Password)]
         public string Password { get; set; }
 
         private readonly CallForBidsContext _context;

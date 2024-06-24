@@ -47,15 +47,15 @@ namespace CallForBids.Areas.RPSubmissions.Pages
             try
             {
                 Submissions = item;
-                if (Submissions.State != 1 && Submissions.State != 2)
+                if (Submissions.State == SubmissionState.Pending)
                 {
-                    Submissions.State = 2;
+                    Submissions.State = SubmissionState.Rejected;
                     await _context.SaveChangesAsync();
                     return RedirectToPage("./Index");
                 }
                 else
                 {
-                    ErrorMessage = $"The submission has already been {(Submissions.State == 1 ? "accepted" : "rejected")}";
+                    ErrorMessage = $"The submission has already been {(Submissions.State)}";
                 }
             }
             catch (Exception ex)

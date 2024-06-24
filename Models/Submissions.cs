@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CallForBids.Models
 {
+    public enum SubmissionState
+    {
+        Pending = 0,
+        Confirmed = 1,
+        Rejected = 2
+    }
     public class Submissions
     {
         public int Id { get; set; }
@@ -15,7 +21,9 @@ namespace CallForBids.Models
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
-        public byte State { get; set; }
+
+        public SubmissionState? State { get; set; } = SubmissionState.Pending;
+
         [DataType(DataType.Text)]
         public string? Description { get; set; }
         [DataType(DataType.DateTime)]

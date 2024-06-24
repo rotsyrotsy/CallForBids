@@ -19,7 +19,7 @@ namespace CallForBids.Areas.RPSubmissions.Pages
         public async Task OnGetAsync()
         {
             Submissions = await _context.Submissions
-                .Where(s => s.State != 1 && s.State != 2)
+                .Where(s => s.State == SubmissionState.Pending)
                 .Include(s => s.Bid)
                 .Include(s => s.User)
                 .ThenInclude(u => u.Suppliers).ToListAsync();

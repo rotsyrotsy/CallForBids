@@ -9,10 +9,12 @@ namespace CallForBids.Areas.RPBids.Pages
     public class CreateModel : PageModel
     {
         private readonly CallForBidsContext _context;
+        private IWebHostEnvironment _environment;
 
-        public CreateModel(CallForBidsContext context)
+        public CreateModel(CallForBidsContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         public IActionResult OnGet()
@@ -25,9 +27,10 @@ namespace CallForBids.Areas.RPBids.Pages
         [BindProperty]
         public Bids Bids { get; set; } = new();
         public string ErrorMessage { get; set; }
+        public IFormFile Upload { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostFormBidsAsync()
         {
             var newItem = new Bids();
 
@@ -50,6 +53,38 @@ namespace CallForBids.Areas.RPBids.Pages
                 }
             }
             return Page();
+        }
+        public async Task<IActionResult> OnPostFormUploadAsync()
+        {
+            try
+            {
+                var file = Path.Combine(_environment.ContentRootPath, "wwwroot/uploads", Upload.FileName);
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    await Upload.CopyToAsync(fileStream);
+                }
+                List<Bids> bids;
+                if (Path.GetExtension(file).Equals(".csv", StringComparison.OrdinalIgnoreCase))
+                {
+                    var csvReader = new BidCsvReader(_context);
+                    bids = csvReader.ReadCsvFile(file);
+                }
+                else
+                {
+                    throw new Exception("Unsupported file format");
+                }
+                // Insert projects into the database
+                _context.Bids.AddRange(bids);
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("./Index");
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
+                return Page();
+            }
+
         }
     }
 }

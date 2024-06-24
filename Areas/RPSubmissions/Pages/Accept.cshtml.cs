@@ -39,7 +39,9 @@ namespace CallForBids.Areas.RPSubmissions.Pages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            var item = await _context.Submissions.FirstOrDefaultAsync(m => m.Id == id);
+            var item = await _context.Submissions
+                .Include(s=>s.Bid)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (item == null)
             {
@@ -48,15 +50,19 @@ namespace CallForBids.Areas.RPSubmissions.Pages
             try
             {
                 Submissions = item;
-                if (Submissions.State!=1 && Submissions.State != 2)
+                if (Submissions.State==SubmissionState.Pending)
                 {
-                    Submissions.State = 1;
+                    Submissions.State = SubmissionState.Confirmed;
+                    if (Submissions.Bid != null)
+                    {
+                        Submissions.Bid.IsAvailable = false;
+                    }
                     await _context.SaveChangesAsync();
                     return RedirectToPage("./Index");
                 }
                 else
                 {
-                    ErrorMessage = $"The submission has already been {(Submissions.State == 1 ? "accepted" : "rejected")}";
+                    ErrorMessage = $"The submission has already been {(Submissions.State)}";
                 }
             }
             catch (Exception ex)

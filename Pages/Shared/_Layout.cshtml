@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light fixed-top bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">CallForBids</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -22,55 +22,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Bids
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <a class="dropdown-item" asp-area="RPBids" asp-page="/Index">List</a>
-                                <a class="dropdown-item" asp-area="RPBids" asp-page="/Create">Create</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Offices
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                <a class="dropdown-item" asp-area="RPOffices" asp-page="/Index">List</a>
-                                <a class="dropdown-item" asp-area="RPOffices" asp-page="/Create">Create</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Projects
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                                <a class="dropdown-item" asp-area="RPProjects" asp-page="/Index">List</a>
-                                <a class="dropdown-item" asp-area="RPProjects" asp-page="/Create">Create</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Suppliers
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
-                                <a class="dropdown-item" asp-area="RPSuppliers" asp-page="/Index">List</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Submissions
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown6">
-                                <a class="dropdown-item" asp-area="RPSubmissions" asp-page="/Index">List</a>
-                            </div>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
                     <div>
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Sign Out</a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/AccountAdmin/Login">Log In</a>
                     </div>
                 </div>
             </div>

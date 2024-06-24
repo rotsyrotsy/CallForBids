@@ -11,17 +11,31 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
-builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<CallForBidsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CallForBidsContext") ?? throw new InvalidOperationException("Connection string 'CallForBidsContext' not found.")));
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/AccountAdmin/Login";
+                    options.LogoutPath = "/AccountAdmin/Logout";
+                });
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers(
     options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
-builder.Services.AddRazorPages();
+
+builder.Services.AddRazorPages(
+    options =>
+    {
+        options.Conventions.AuthorizeAreaFolder("RPBids", "/");
+        options.Conventions.AuthorizeAreaFolder("RPOffices", "/");
+        options.Conventions.AuthorizeAreaFolder("RPProjects", "/");
+        options.Conventions.AuthorizeAreaFolder("RPSubmissions", "/");
+        options.Conventions.AuthorizeAreaFolder("RPSuppliers", "/");
+    });
+
 builder.Services.AddControllersWithViews();
 
 
@@ -57,7 +71,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseRequestLocalization("en-MG");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -68,6 +82,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

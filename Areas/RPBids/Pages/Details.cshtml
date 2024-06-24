@@ -66,7 +66,44 @@
             @Html.DisplayFor(model => model.Bids.IsAvailable)
         </dd>
     </dl>
+    <hr />
+    <h4>Historic of Submissions</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bid</th>
+                <th>Date of submission</th>
+                <th>Deadline</th>
+                <th>State</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Bids.Submissions)
+
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bid.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bid.LimitDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        <a asp-area="RPSubmissions" asp-page="/Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Bids.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
