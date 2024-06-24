@@ -80,7 +80,7 @@ public class BidsRepository
                             Location = reader.GetString(7),
                             Address = reader.GetString(8),
                             ProjectTitle = reader.GetString(9),
-                            IsAvailable = reader.GetByte(10),
+                            IsAvailable = reader.GetByte(10) != 0,
                         });
                     }
                 }

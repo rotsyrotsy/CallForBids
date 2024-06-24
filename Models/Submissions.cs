@@ -33,5 +33,16 @@ namespace CallForBids.Models
         public ICollection<Documents>? Documents { get; set; }
         public String BidTitle { get; set; }
 
+        public static SubmissionState getState(int state)
+        {
+            switch (state)
+            {
+                case 0: return SubmissionState.Pending;
+                case 1: return SubmissionState.Confirmed;
+                case 2: return SubmissionState.Rejected;
+                default: return SubmissionState.Pending;
+            }
+        }
+
     }
 }

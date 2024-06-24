@@ -61,7 +61,7 @@ namespace CallForBids.Data
                                 BidId = reader.GetInt32(1),
                                 UserId = reader.GetInt32(2),
                                 Date = reader.GetDateTime(3),
-                                State = reader.GetByte(4),
+                                State = Submissions.getState(reader.GetByte(4)),
                                 Description = reader.GetString(5),
                                 BidTitle = reader.GetString(6),
 
