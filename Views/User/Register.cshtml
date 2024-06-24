@@ -1,22 +1,101 @@
 ﻿@model CallForBids.Models.RegisterViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
 
-<h2>Register</h2>
+<head>
+    <title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</head>
 
-<form asp-action="Register" method="post">
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+<body class="body">
+    <div class="container">
+        <div class="row">
+            <div class="card col-md-4 mx-auto mt-5">
+                <div class="card-body">
+                    <form id="loginForm" asp-action="Register" method="post">
+                        <div class="text-center">
+                            <h1>Register as a supplier</h1>
+                        </div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input asp-for="Name" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Name" class="form-text text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <input asp-for="Address" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Address" class="form-text text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input asp-for="Phone" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Phone" class="form-text text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Supplier Number</label>
+                            <input asp-for="SupplierNumber" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="SupplierNumber" class="form-text text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" type="email" autocomplete="off" />
+                            <span asp-validation-for="Email" class="form-text text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input asp-for="Password" class="form-control" type="password"  autocomplete="off" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <input asp-for="ConfirmPassword" class="form-control" type="password" autocomplete="off" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <button id="loginSAT" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <a class="nav-link" href="./Login">Already have an account?</a>
+
+                </div>
+             </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword"></label>
-        <input asp-for="ConfirmPassword" type="password" class="form-control" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+
+    <partial name="_ValidationScriptsPartial" />
+    <style>
+        .form-control.is-invalid, .was-validated .form-control:invalid {
+            background-image: none;
+            border-color: #ced4da;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            $('#loginSAT').on('click', function () {
+                let $password = $('#Password');
+                $password.removeClass('is-invalid');
+                let password = $password.val();
+
+                if (!password) {
+                    $password.addClass('is-invalid');
+                }
+
+                $('#loginForm').validate();
+                if (($('#loginForm').valid() === false) || !password)
+                    return false;
+
+                return true;
+            });
+        });
+    </script>
+</body>
+</html>

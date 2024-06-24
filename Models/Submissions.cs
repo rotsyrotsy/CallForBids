@@ -31,6 +31,7 @@ namespace CallForBids.Models
         [DataType(DataType.DateTime)]
         public DateTime? ValidationDate { get; set; }
         public ICollection<Documents>? Documents { get; set; }
+        [NotMapped]
         public String BidTitle { get; set; }
 
         public static SubmissionState getState(int state)

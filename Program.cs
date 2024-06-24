@@ -50,7 +50,6 @@ builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new 
 builder.Services.AddTransient<BidsRepository>();
 builder.Services.AddTransient<UserRepository>();
 builder.Services.AddTransient<SubmissionRepository>();
-//builder.Services.AddTransient<BasketRepository>();
 builder.Services.AddTransient<PdfService>();
 builder.Services.AddTransient<RazorViewToStringRenderer>();
 

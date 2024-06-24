@@ -5,6 +5,7 @@ using CallForBids.Models;
 using CallForBids.Session;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace MvcAdoExample.Controllers
 {
@@ -26,27 +27,45 @@ namespace MvcAdoExample.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+
             if (ModelState.IsValid)
             {
-                var user = new Users
+                if (model.ConfirmPassword == model.Password)
                 {
-                    Email = model.Email,
-                    //Phone = model.Phone,
-                    Password = model.Password, // TODO Note: Hash passwords in a real app!
-                };
+                    var supplier = new Suppliers
+                    {
+                        Name = model.Name,
+                        SupplierNumber = model.SupplierNumber,
+                        Address = model.Address,
+                        Phone = model.Phone,
+                        Email = model.Email,
+                    };
 
-                var result = await _userRepository.RegisterUserAsync(user);
-                if (result)
-                {
-                    return RedirectToAction("Login");
+                    var idSupplier = await _userRepository.RegisterSupplierAsync(supplier);
+                    if (idSupplier > 0)
+                    {
+                        var user = new Users
+                        {
+                            Email = model.Email,
+                            Password = model.Password,
+                            SupplierId = idSupplier,
+                        };
+                        var result = await _userRepository.RegisterUserAsync(user);
+                        if (result)
+                        {
+                            return RedirectToAction("Login");
+                        }
+                    }
+                    ModelState.AddModelError("", "Failed to register user.");
                 }
-
-                ModelState.AddModelError("", "Failed to register user.");
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Password and confirm password do not match.");
+                }
             }
 
             return View(model);
         }
-
         [HttpGet]
         public IActionResult Login()
         {
@@ -63,13 +82,11 @@ namespace MvcAdoExample.Controllers
                 {
                     // Authenticate user (this is just an example, implement proper authentication)
                     HttpContext.Session.SetObject<Users>("User", user);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Bids");
                 }
-
-                ModelState.AddModelError("", "Invalid login attempt.");
             }
-
-            return RedirectToAction("Dish", "Index");
+            ModelState.AddModelError("", "Invalid login attempt.");
+            return View();
 
         }
     }

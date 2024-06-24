@@ -44,7 +44,7 @@ namespace CallForBids.Pages.AccountAdmin
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("/RPBids");
 
             if (ModelState.IsValid)
             {

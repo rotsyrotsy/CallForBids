@@ -78,7 +78,7 @@ public class BidsRepository
                             Description = reader.GetString(5),
                             FiscalYear = reader.GetString(6),
                             Location = reader.GetString(7),
-                            Address = reader.GetString(8),
+                            Address = reader.GetString(8) ?? "",
                             ProjectTitle = reader.GetString(9),
                             IsAvailable = reader.GetByte(10) != 0,
                         });

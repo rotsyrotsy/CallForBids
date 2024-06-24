@@ -26,9 +26,11 @@ namespace CallForBids.Models
         public bool IsAvailable { get; set; }
 
         public ICollection<Submissions>? Submissions { get; set; }
-
+        [NotMapped]
         public string Location { get; set; }
+        [NotMapped]
         public string Address { get; set; }
+        [NotMapped]
         public string ProjectTitle { get; set; }
 
     }
