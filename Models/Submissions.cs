@@ -21,7 +21,9 @@ namespace CallForBids.Models
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
+
         public SubmissionState? State { get; set; } = SubmissionState.Pending;
+
         [DataType(DataType.Text)]
         public string? Description { get; set; }
         [DataType(DataType.DateTime)]
@@ -29,5 +31,7 @@ namespace CallForBids.Models
         [DataType(DataType.DateTime)]
         public DateTime? ValidationDate { get; set; }
         public ICollection<Documents>? Documents { get; set; }
+        public String BidTitle { get; set; }
+
     }
 }

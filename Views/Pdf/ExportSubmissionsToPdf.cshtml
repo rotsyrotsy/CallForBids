@@ -1,0 +1,65 @@
+﻿@model CallForBids.Models.ExportSubmissionsToPdf
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Export to PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .content {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>List of Submissions of @Model.Users.Email</h1>
+
+        <h2>Items</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bid Name</th>
+                    <th>Date of Submission</th>
+                    <th>Actual State</th>
+                    <th>Description</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sub in Model.Submissions)
+                {
+                    <tr>
+                        <td>@sub.Id</td>
+                        <td>@sub.BidTitle</td>
+                        <td>@sub.Date</td>
+                        <td>@sub.State</td>
+                        <td>@sub.Description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+  
+
+</body>
+</html>
